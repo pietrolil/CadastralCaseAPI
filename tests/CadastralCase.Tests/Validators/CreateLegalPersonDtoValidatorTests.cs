@@ -1,0 +1,293 @@
+using CadastralCase.Application.DTOs.LegalPerson;
+using CadastralCase.Application.Validators.LegalPerson;
+using FluentValidation.TestHelper;
+using Xunit;
+
+namespace CadastralCase.Tests.Validators;
+
+public class CreateLegalPersonDtoValidatorTests
+{
+    private readonly CreateLegalPersonDtoValidator _validator;
+
+    public CreateLegalPersonDtoValidatorTests()
+    {
+        _validator = new CreateLegalPersonDtoValidator();
+    }
+
+    [Fact]
+    public void Should_HaveError_When_CompanyNameIsEmpty()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto { CompanyName = "" };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.CompanyName)
+            .WithErrorMessage("Company name is required");
+    }
+
+    [Fact]
+    public void Should_HaveError_When_CompanyNameExceeds300Characters()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto { CompanyName = new string('A', 301) };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.CompanyName)
+            .WithErrorMessage("Company name must not exceed 300 characters");
+    }
+
+    [Fact]
+    public void Should_HaveError_When_TradeNameIsEmpty()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto { TradeName = "" };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.TradeName)
+            .WithErrorMessage("Trade name is required");
+    }
+
+    [Fact]
+    public void Should_HaveError_When_TradeNameExceeds200Characters()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto { TradeName = new string('A', 201) };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.TradeName)
+            .WithErrorMessage("Trade name must not exceed 200 characters");
+    }
+
+    [Fact]
+    public void Should_HaveError_When_TaxIdIsEmpty()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto { TaxId = "" };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.TaxId)
+            .WithErrorMessage("Tax ID is required");
+    }
+
+    [Theory]
+    [InlineData("12345678901234")] // CNPJ inválido
+    [InlineData("00000000000000")] // todos iguais
+    [InlineData("123")] // muito curto
+    public void Should_HaveError_When_TaxIdIsInvalid(string invalidTaxId)
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = invalidTaxId,
+            FoundingDate = DateTime.Now.AddYears(-5)
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.TaxId)
+            .WithErrorMessage("Invalid Tax ID (CNPJ)");
+    }
+
+    [Theory]
+    [InlineData("11222333000181")] // CNPJ válido
+    [InlineData("11.222.333/0001-81")] // CNPJ válido com máscara
+    public void Should_NotHaveError_When_TaxIdIsValid(string validTaxId)
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = validTaxId,
+            FoundingDate = DateTime.Now.AddYears(-5)
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldNotHaveValidationErrorFor(x => x.TaxId);
+    }
+
+    [Fact]
+    public void Should_HaveError_When_FoundingDateIsEmpty()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = default
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.FoundingDate)
+            .WithErrorMessage("Founding date is required");
+    }
+
+    [Fact]
+    public void Should_HaveError_When_FoundingDateIsInFuture()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = DateTime.Now.AddDays(1)
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.FoundingDate)
+            .WithErrorMessage("Founding date must be before current date");
+    }
+
+    [Fact]
+    public void Should_HaveError_When_FoundingDateIsBefore1800()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = new DateTime(1799, 12, 31)
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.FoundingDate)
+            .WithErrorMessage("Founding date must be after 1800");
+    }
+
+    [Fact]
+    public void Should_HaveError_When_EmailIsInvalid()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = DateTime.Now.AddYears(-5),
+            Email = "email-invalido"
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Email)
+            .WithErrorMessage("Invalid email format");
+    }
+
+    [Fact]
+    public void Should_NotHaveError_When_EmailIsValid()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = DateTime.Now.AddYears(-5),
+            Email = "contato@xyz.com"
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldNotHaveValidationErrorFor(x => x.Email);
+    }
+
+    [Fact]
+    public void Should_NotHaveError_When_EmailIsEmpty()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = DateTime.Now.AddYears(-5),
+            Email = ""
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldNotHaveValidationErrorFor(x => x.Email);
+    }
+
+    [Fact]
+    public void Should_HaveError_When_PhoneExceeds20Characters()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = DateTime.Now.AddYears(-5),
+            Phone = new string('1', 21)
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Phone)
+            .WithErrorMessage("Phone must not exceed 20 characters");
+    }
+
+    [Fact]
+    public void Should_NotHaveError_When_AllFieldsAreValid()
+    {
+        // Arrange
+        var dto = new CreateLegalPersonDto 
+        { 
+            CompanyName = "Empresa XYZ LTDA",
+            TradeName = "XYZ Tech",
+            TaxId = "11222333000181",
+            FoundingDate = DateTime.Now.AddYears(-5),
+            Email = "contato@xyz.com",
+            Phone = "11999999999"
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldNotHaveAnyValidationErrors();
+    }
+}
