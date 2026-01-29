@@ -29,6 +29,24 @@ public class CreateAddressDtoValidatorTests
             .WithErrorMessage("Postal code is required");
     }
 
+    [Fact]
+    public void Should_HaveError_When_NumberIsEmpty()
+    {
+        // Arrange
+        var dto = new CreateAddressDto 
+        { 
+            PostalCode = "12345678",
+            Number = ""
+        };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Number)
+            .WithErrorMessage("Number is required");
+    }
+
     [Theory]
     [InlineData("1234567")] // 7 dígitos
     [InlineData("123456789")] // 9 dígitos
@@ -55,6 +73,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = validPostalCode,
+            Number = "123",
             QueryViaCep = true // quando true, outros campos não são obrigatórios
         };
 
@@ -72,6 +91,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = "12345678",
+            Number = "123",
             QueryViaCep = false,
             Street = ""
         };
@@ -91,6 +111,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = "12345678",
+            Number = "123",
             QueryViaCep = false,
             City = ""
         };
@@ -110,6 +131,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = "12345678",
+            Number = "123",
             QueryViaCep = false,
             State = ""
         };
@@ -131,6 +153,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = "12345678",
+            Number = "123",
             QueryViaCep = false,
             Street = "Rua Principal",
             City = "São Paulo",
@@ -153,6 +176,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = "12345678",
+            Number = "123",
             QueryViaCep = false,
             StateName = ""
         };
@@ -172,6 +196,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = "12345678",
+            Number = "123",
             QueryViaCep = true
         };
 
@@ -192,6 +217,7 @@ public class CreateAddressDtoValidatorTests
         var dto = new CreateAddressDto 
         { 
             PostalCode = "12345678",
+            Number = "123",
             QueryViaCep = false,
             Street = "Rua Principal",
             City = "São Paulo",

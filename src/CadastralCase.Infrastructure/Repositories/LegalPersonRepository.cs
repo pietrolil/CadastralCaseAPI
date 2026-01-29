@@ -17,21 +17,18 @@ public class LegalPersonRepository : ILegalPersonRepository
     public async Task<LegalPerson?> GetByIdAsync(Guid id)
     {
         return await _context.LegalPersons
-            .Include(p => p.Address)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<IEnumerable<LegalPerson>> GetAllAsync()
     {
         return await _context.LegalPersons
-            .Include(p => p.Address)
             .ToListAsync();
     }
 
     public async Task<IEnumerable<LegalPerson>> GetActiveAsync()
     {
         return await _context.LegalPersons
-            .Include(p => p.Address)
             .Where(p => p.IsActive)
             .ToListAsync();
     }
@@ -40,14 +37,12 @@ public class LegalPersonRepository : ILegalPersonRepository
     {
         var cleanTaxId = taxId.Replace(".", "").Replace("/", "").Replace("-", "");
         return await _context.LegalPersons
-            .Include(p => p.Address)
             .FirstOrDefaultAsync(p => p.TaxId == cleanTaxId);
     }
 
     public async Task<IEnumerable<LegalPerson>> GetByCompanyNameAsync(string companyName)
     {
         return await _context.LegalPersons
-            .Include(p => p.Address)
             .Where(p => p.CompanyName.Contains(companyName))
             .ToListAsync();
     }

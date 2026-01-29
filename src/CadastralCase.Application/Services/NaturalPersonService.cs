@@ -27,13 +27,23 @@ public class NaturalPersonService
     public async Task<NaturalPersonDto?> GetByIdAsync(Guid id)
     {
         var person = await _repository.GetByIdAsync(id);
-        return person != null ? MapToDto(person) : null;
+        if (person == null) return null;
+
+        await LoadAddressAsync(person);
+        return MapToDto(person);
     }
 
     public async Task<IEnumerable<NaturalPersonDto>> GetAllAsync()
     {
         var persons = await _repository.GetAllAsync();
-        return persons.Select(MapToDto);
+        var personsList = persons.ToList();
+        
+        foreach (var person in personsList)
+        {
+            await LoadAddressAsync(person);
+        }
+        
+        return personsList.Select(MapToDto);
     }
 
     public async Task<NaturalPersonDto> CreateAsync(CreateNaturalPersonDto dto)
@@ -160,5 +170,19 @@ public class NaturalPersonService
             CreatedAt = address.CreatedAt,
             UpdatedAt = address.UpdatedAt
         };
+    }
+
+    private async Task LoadAddressAsync(NaturalPerson person)
+    {
+        if (person.AddressId.HasValue)
+        {
+            var address = await _addressRepository.GetByIdAsync(person.AddressId.Value);
+            if (address != null)
+            {
+                person.SetAddress(person.AddressId.Value);
+                var addressProperty = typeof(NaturalPerson).GetProperty("Address");
+                addressProperty?.SetValue(person, address);
+            }
+        }
     }
 }

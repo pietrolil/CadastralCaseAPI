@@ -17,21 +17,18 @@ public class NaturalPersonRepository : INaturalPersonRepository
     public async Task<NaturalPerson?> GetByIdAsync(Guid id)
     {
         return await _context.NaturalPersons
-            .Include(p => p.Address)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<IEnumerable<NaturalPerson>> GetAllAsync()
     {
         return await _context.NaturalPersons
-            .Include(p => p.Address)
             .ToListAsync();
     }
 
     public async Task<IEnumerable<NaturalPerson>> GetActiveAsync()
     {
         return await _context.NaturalPersons
-            .Include(p => p.Address)
             .Where(p => p.IsActive)
             .ToListAsync();
     }
@@ -40,14 +37,12 @@ public class NaturalPersonRepository : INaturalPersonRepository
     {
         var cleanTaxId = taxId.Replace(".", "").Replace("-", "");
         return await _context.NaturalPersons
-            .Include(p => p.Address)
             .FirstOrDefaultAsync(p => p.TaxId == cleanTaxId);
     }
 
     public async Task<IEnumerable<NaturalPerson>> GetByNameAsync(string name)
     {
         return await _context.NaturalPersons
-            .Include(p => p.Address)
             .Where(p => p.Name.Contains(name))
             .ToListAsync();
     }

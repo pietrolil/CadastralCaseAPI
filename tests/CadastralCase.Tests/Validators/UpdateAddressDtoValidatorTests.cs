@@ -42,6 +42,19 @@ public class UpdateAddressDtoValidatorTests
     }
 
     [Fact]
+    public void Should_HaveError_When_NumberIsEmpty()
+    {
+        // Arrange
+        var dto = new UpdateAddressDto { Number = "" };
+
+        // Act
+        var result = _validator.TestValidate(dto);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Number);
+    }
+
+    [Fact]
     public void Should_HaveError_When_CityIsEmpty()
     {
         // Arrange
@@ -77,6 +90,7 @@ public class UpdateAddressDtoValidatorTests
         { 
             PostalCode = "12345678",
             Street = "Rua Principal",
+            Number = "123",
             City = "São Paulo",
             State = invalidState,
             StateName = "São Paulo"
@@ -110,6 +124,7 @@ public class UpdateAddressDtoValidatorTests
         { 
             PostalCode = "12345678",
             Street = "Rua Principal",
+            Number = "123",
             City = "São Paulo",
             State = "SP",
             StateName = "São Paulo"
@@ -130,6 +145,7 @@ public class UpdateAddressDtoValidatorTests
         { 
             PostalCode = "12345-678",
             Street = "Rua Principal",
+            Number = "123",
             City = "São Paulo",
             State = "SP",
             StateName = "São Paulo"

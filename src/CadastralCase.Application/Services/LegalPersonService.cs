@@ -27,13 +27,23 @@ public class LegalPersonService
     public async Task<LegalPersonDto?> GetByIdAsync(Guid id)
     {
         var company = await _repository.GetByIdAsync(id);
-        return company != null ? MapToDto(company) : null;
+        if (company == null) return null;
+
+        await LoadAddressAsync(company);
+        return MapToDto(company);
     }
 
     public async Task<IEnumerable<LegalPersonDto>> GetAllAsync()
     {
         var companies = await _repository.GetAllAsync();
-        return companies.Select(MapToDto);
+        var companiesList = companies.ToList();
+        
+        foreach (var company in companiesList)
+        {
+            await LoadAddressAsync(company);
+        }
+        
+        return companiesList.Select(MapToDto);
     }
 
     public async Task<LegalPersonDto> CreateAsync(CreateLegalPersonDto dto)
@@ -162,5 +172,20 @@ public class LegalPersonService
             CreatedAt = address.CreatedAt,
             UpdatedAt = address.UpdatedAt
         };
+    }
+
+    private async Task LoadAddressAsync(LegalPerson company)
+    {
+        if (company.AddressId.HasValue)
+        {
+            var address = await _addressRepository.GetByIdAsync(company.AddressId.Value);
+            if (address != null)
+            {
+                company.SetAddress(company.AddressId.Value);
+                // Use reflection to set the Address property since it's private set
+                var addressProperty = typeof(LegalPerson).GetProperty("Address");
+                addressProperty?.SetValue(company, address);
+            }
+        }
     }
 }

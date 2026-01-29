@@ -11,7 +11,7 @@ namespace CadastralCase.Infrastructure.ExternalServices;
 public class ViaCepService : IViaCepService
 {
     private readonly HttpClient _httpClient;
-    private const string BaseUrl = "https://viacep.com.br/ws";
+    private const string BaseUrl = "https://viacep.com.br";
 
     public ViaCepService(HttpClient httpClient)
     {
@@ -28,7 +28,7 @@ public class ViaCepService : IViaCepService
             if (string.IsNullOrWhiteSpace(cleanCode) || cleanCode.Length != 8)
                 return null;
 
-            var response = await _httpClient.GetAsync($"/{cleanCode}/json/");
+            var response = await _httpClient.GetAsync($"/ws/{cleanCode}/json/");
 
             if (!response.IsSuccessStatusCode)
                 return null;

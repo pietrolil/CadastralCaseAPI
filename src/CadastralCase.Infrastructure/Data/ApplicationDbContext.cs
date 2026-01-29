@@ -45,10 +45,7 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.IsActive)
                 .IsRequired();
 
-            entity.HasOne(e => e.Address)
-                .WithMany()
-                .HasForeignKey(e => e.AddressId)
-                .OnDelete(DeleteBehavior.SetNull);
+            entity.Ignore(e => e.Address);
         });
 
         modelBuilder.Entity<LegalPerson>(entity =>
@@ -83,10 +80,7 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.IsActive)
                 .IsRequired();
 
-            entity.HasOne(e => e.Address)
-                .WithMany()
-                .HasForeignKey(e => e.AddressId)
-                .OnDelete(DeleteBehavior.SetNull);
+            entity.Ignore(e => e.Address);
         });
 
     }

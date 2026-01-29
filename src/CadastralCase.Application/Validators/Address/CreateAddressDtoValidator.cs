@@ -11,6 +11,9 @@ public class CreateAddressDtoValidator : AbstractValidator<CreateAddressDto>
             .NotEmpty().WithMessage("Postal code is required")
             .Must(BeValidPostalCode).WithMessage("Postal code must have 8 digits");
 
+        RuleFor(x => x.Number)
+            .NotEmpty().WithMessage("Number is required");
+
         When(x => !x.QueryViaCep, () =>
         {
             RuleFor(x => x.Street)

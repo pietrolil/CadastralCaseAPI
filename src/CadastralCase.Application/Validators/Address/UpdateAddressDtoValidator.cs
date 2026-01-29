@@ -14,6 +14,9 @@ public class UpdateAddressDtoValidator : AbstractValidator<UpdateAddressDto>
         RuleFor(x => x.Street)
             .NotEmpty().WithMessage("Street is required");
 
+        RuleFor(x => x.Number)
+            .NotEmpty().WithMessage("Number is required");
+
         RuleFor(x => x.City)
             .NotEmpty().WithMessage("City is required");
 

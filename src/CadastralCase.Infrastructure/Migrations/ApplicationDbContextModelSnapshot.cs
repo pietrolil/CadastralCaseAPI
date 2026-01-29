@@ -74,7 +74,7 @@ namespace CadastralCase.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("CadastralCase.Domain.Entities.LegalPerson", b =>
