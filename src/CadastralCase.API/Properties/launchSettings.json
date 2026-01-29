@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7221",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AWS_ACCESS_KEY_ID": "YOUR_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY": "YOUR_SECRET_ACCESS_KEY",
+        "AWS_REGION": "us-east-1"
+      }
+    }
+  }
+}
