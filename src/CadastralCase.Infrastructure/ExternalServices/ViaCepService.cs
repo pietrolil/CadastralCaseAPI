@@ -1,6 +1,7 @@
 using CadastralCase.Domain.Interfaces;
 using System.Text.Json;
 using CadastralCase.Domain.Models;
+using CadastralCase.Infrastructure.Models;
 
 namespace CadastralCase.Infrastructure.ExternalServices;
 
