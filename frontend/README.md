@@ -91,7 +91,6 @@ npm run test:coverage
 
 | Rota | Descrição | Lazy Loading |
 |------|-----------|--------------|
-| `/dashboard` | Dashboard principal | ✅ |
 | `/addresses` | Lista de endereços | ✅ |
 | `/addresses/new` | Novo endereço | ✅ |
 | `/addresses/edit/:id` | Editar endereço | ✅ |
