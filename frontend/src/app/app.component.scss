@@ -1,0 +1,32 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+}
+
+app-menu {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #fafafa;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  app-menu {
+    width: 100%;
+  }
+}

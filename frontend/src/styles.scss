@@ -1,0 +1,480 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Toast Messages Styling - Override PrimeNG defaults */
+.p-toast {
+  opacity: 1 !important;
+  z-index: 9999 !important;
+}
+
+.p-toast .p-toast-message {
+  margin: 0 0 1rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+}
+
+.p-toast .p-toast-message-success {
+  background: #f0fdf4 !important;
+  border: solid 2px #86efac !important;
+  border-left-width: 6px !important;
+  color: #166534 !important;
+}
+
+.p-toast .p-toast-message-success .p-toast-message-icon,
+.p-toast .p-toast-message-success .p-toast-icon-close {
+  color: #16a34a !important;
+}
+
+.p-toast .p-toast-message-success .p-toast-summary {
+  color: #166534 !important;
+  font-weight: 700 !important;
+}
+
+.p-toast .p-toast-message-success .p-toast-detail {
+  color: #166534 !important;
+}
+
+.p-toast .p-toast-message-error {
+  background: #fef2f2 !important;
+  border: solid 2px #fca5a5 !important;
+  border-left-width: 6px !important;
+  color: #991b1b !important;
+}
+
+.p-toast .p-toast-message-error .p-toast-message-icon,
+.p-toast .p-toast-message-error .p-toast-icon-close {
+  color: #dc2626 !important;
+}
+
+.p-toast .p-toast-message-error .p-toast-summary {
+  color: #991b1b !important;
+  font-weight: 700 !important;
+}
+
+.p-toast .p-toast-message-error .p-toast-detail {
+  color: #991b1b !important;
+}
+
+.p-toast .p-toast-message-warn {
+  background: #fffbeb !important;
+  border: solid 2px #fcd34d !important;
+  border-left-width: 6px !important;
+  color: #92400e !important;
+}
+
+.p-toast .p-toast-message-warn .p-toast-message-icon,
+.p-toast .p-toast-message-warn .p-toast-icon-close {
+  color: #f59e0b !important;
+}
+
+.p-toast .p-toast-message-warn .p-toast-summary {
+  color: #92400e !important;
+  font-weight: 700 !important;
+}
+
+.p-toast .p-toast-message-warn .p-toast-detail {
+  color: #92400e !important;
+}
+
+.p-toast .p-toast-message-info {
+  background: #eff6ff !important;
+  border: solid 2px #93c5fd !important;
+  border-left-width: 6px !important;
+  color: #1e40af !important;
+}
+
+.p-toast .p-toast-message-info .p-toast-message-icon,
+.p-toast .p-toast-message-info .p-toast-icon-close {
+  color: #3b82f6 !important;
+}
+
+.p-toast .p-toast-message-info .p-toast-summary {
+  color: #1e40af !important;
+  font-weight: 700 !important;
+}
+
+.p-toast .p-toast-message-info .p-toast-detail {
+  color: #1e40af !important;
+}
+
+.p-toast .p-toast-message .p-toast-summary {
+  font-size: 1rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.p-toast .p-toast-message .p-toast-detail {
+  font-size: 0.875rem !important;
+  margin: 0 !important;
+}
+
+/* Confirm Dialog Styling - Override PrimeNG defaults */
+.p-confirm-dialog {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  overflow: hidden !important;
+  max-width: 520px !important;
+  min-width: 440px !important;
+}
+
+.p-confirm-dialog .p-dialog-header {
+  background: linear-gradient(to bottom, #ffffff, #fafafa) !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 2rem 2.5rem !important;
+}
+
+.p-confirm-dialog .p-dialog-header .p-dialog-header-icons {
+  display: none !important;
+}
+
+.p-confirm-dialog .p-dialog-title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.3 !important;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  background: #ffffff !important;
+  padding: 2.5rem !important;
+  color: #374151 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.7 !important;
+  min-height: 120px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+}
+
+.p-confirm-dialog .p-dialog-footer {
+  background: #f9fafb !important;
+  border-top: 1px solid #e5e7eb !important;
+  padding: 1.75rem 2.5rem !important;
+  display: flex !important;
+  gap: 1.25rem !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+}
+
+.p-confirm-dialog .p-confirm-dialog-icon {
+  color: #f59e0b !important;
+  font-size: 3rem !important;
+  margin-right: 0rem !important;
+  flex-shrink: 0 !important;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #fef3c7 !important;
+  border-radius: 50% !important;
+  padding: 0.5rem !important;
+}
+
+.p-confirm-dialog .p-confirm-dialog-message {
+  margin-left: 1.5rem !important;
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  padding-top: 0.25rem !important;
+}
+
+/* Calendar Dropdown Styling */
+.p-datepicker {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  padding: 0.5rem !important;
+}
+
+.p-datepicker .p-datepicker-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.p-datepicker table td {
+  padding: 0.25rem !important;
+}
+
+.p-datepicker table td > span {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.p-datepicker table td > span:hover {
+  background: #f3f4f6 !important;
+}
+
+.p-datepicker table td > span.p-highlight {
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+.p-datepicker table td.p-datepicker-today > span {
+  background: #dbeafe !important;
+  color: #1e40af !important;
+  font-weight: 600 !important;
+}
+
+.p-datepicker .p-monthpicker-month,
+.p-datepicker .p-yearpicker-year {
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.p-datepicker .p-monthpicker-month:hover,
+.p-datepicker .p-yearpicker-year:hover {
+  background: #f3f4f6 !important;
+}
+
+.p-datepicker .p-monthpicker-month.p-highlight,
+.p-datepicker .p-yearpicker-year.p-highlight {
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* Dropdown (Address Selection) Styling */
+.p-dropdown-panel {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  margin-top: 4px !important;
+}
+
+.p-dropdown-panel .p-dropdown-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 0.75rem !important;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0.5rem !important;
+}
+
+.p-dropdown-panel .p-dropdown-item {
+  padding: 0.75rem !important;
+  border-radius: 6px !important;
+  margin-bottom: 0.25rem !important;
+  transition: all 0.2s ease !important;
+  background: #ffffff !important;
+}
+
+.p-dropdown-panel .p-dropdown-item:hover {
+  background: #f3f4f6 !important;
+}
+
+.p-dropdown-panel .p-dropdown-item.p-highlight {
+  background: #dbeafe !important;
+  color: #1e40af !important;
+}
+
+.p-dropdown-panel .p-dropdown-empty-message {
+  padding: 1rem !important;
+  text-align: center !important;
+  color: #9ca3af !important;
+}
+
+/* Dialog Overlay */
+.p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(4px) !important;
+  animation: fadeIn 0.2s ease !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Button Styling for Dialogs */
+.p-confirm-dialog .p-button {
+  border-radius: 10px !important;
+  padding: 0.875rem 2rem !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 2px solid transparent !important;
+  min-width: 130px !important;
+  cursor: pointer !important;
+  letter-spacing: 0.01em !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.p-confirm-dialog .p-button::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translate(-50%, -50%) !important;
+  transition: width 0.3s, height 0.3s !important;
+}
+
+.p-confirm-dialog .p-button:hover::before {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+.p-confirm-dialog .p-button .p-button-label {
+  font-weight: 600 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.p-confirm-dialog .p-button .p-button-icon {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.p-confirm-dialog .p-button.p-button-text {
+  background: #ffffff !important;
+  border: 2px solid #d1d5db !important;
+  color: #374151 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+.p-confirm-dialog .p-button.p-button-text:hover {
+  background: #f3f4f6 !important;
+  border-color: #6b7280 !important;
+  color: #111827 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-2px) !important;
+}
+
+.p-confirm-dialog .p-button.p-button-text:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+.p-confirm-dialog .p-button.p-button-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  border: 2px solid #ef4444 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+  font-weight: 700 !important;
+}
+
+.p-confirm-dialog .p-button.p-button-danger:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  border-color: #dc2626 !important;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+.p-confirm-dialog .p-button.p-button-danger:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+}
+
+.p-confirm-dialog .p-button.p-button-danger:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Focus states for accessibility */
+.p-confirm-dialog .p-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5) !important;
+}
+
+.p-confirm-dialog .p-button.p-button-danger:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* Dropdown Input Field Styling */
+.p-dropdown {
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  background: #ffffff !important;
+}
+
+.p-dropdown:not(.p-disabled):hover {
+  border-color: #9ca3af !important;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.p-dropdown .p-dropdown-label {
+  padding: 0.625rem 0.75rem !important;
+  color: #1f2937 !important;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+  color: #9ca3af !important;
+}
+
+.p-dropdown .p-dropdown-trigger {
+  color: #6b7280 !important;
+}
+
+/* Calendar Input Field Styling */
+.p-calendar .p-inputtext {
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  padding: 0.625rem 0.75rem !important;
+  transition: all 0.2s ease !important;
+  background: #ffffff !important;
+}
+
+.p-calendar .p-inputtext:enabled:hover {
+  border-color: #9ca3af !important;
+}
+
+.p-calendar .p-inputtext:enabled:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Scrollbar Styling for Dropdowns */
+.p-dropdown-panel .p-dropdown-items::-webkit-scrollbar,
+.p-datepicker::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.p-dropdown-panel .p-dropdown-items::-webkit-scrollbar-track,
+.p-datepicker::-webkit-scrollbar-track {
+  background: #f3f4f6 !important;
+  border-radius: 4px !important;
+}
+
+.p-dropdown-panel .p-dropdown-items::-webkit-scrollbar-thumb,
+.p-datepicker::-webkit-scrollbar-thumb {
+  background: #d1d5db !important;
+  border-radius: 4px !important;
+}
+
+.p-dropdown-panel .p-dropdown-items::-webkit-scrollbar-thumb:hover,
+.p-datepicker::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af !important;
+}
